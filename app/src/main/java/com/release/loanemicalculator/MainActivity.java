@@ -1,6 +1,7 @@
 package com.release.loanemicalculator;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_e_m_i_calculator);
+        setContentView(R.layout.activity_main);
 
         setToolbar("Monthly EMI Calculator");
 
@@ -67,9 +68,10 @@ public class MainActivity extends AppCompatActivity {
         Integer interestRate = Integer.parseInt(rate);
         Integer time = Integer.parseInt(years);
 
-
-
         String emi = emiCalculate( Double.valueOf(principal), Double.valueOf(interestRate), Double.valueOf(time));
+        startActivity(new Intent(MainActivity.this, EMIResultActivity.class).putExtra("emi", emi));
+
+        /*
         // Begin the transaction
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         // Replace the contents of the container with the new fragment
@@ -78,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         ft.addToBackStack(null);
         // Complete the changes added above
         ft.commit();
+
+         */
 
 
         //intent.putExtra(EXTRA_MESSAGE, emi);
