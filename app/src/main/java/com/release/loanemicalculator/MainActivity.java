@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,7 +18,6 @@ import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Toolbar myToolbar;
     public static final String EXTRA_MESSAGE = "com.example.emiCalculator.MESSAGE";
 
     Button btncalculate;
@@ -25,12 +26,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_e_m_i_calculator);
-        myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(getDrawable(R.drawable.favicon32x32));
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        setToolbar("Monthly EMI Calculator");
 
         btncalculate = findViewById(R.id.calculate);
         editrate = findViewById(R.id.editroi);
@@ -41,6 +38,18 @@ public class MainActivity extends AppCompatActivity {
                 calculate(v);
             }
         });
+    }
+
+    public void setToolbar(@NonNull String title) {
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        TextView tootlbarTitle = (TextView) findViewById(R.id.toolbar_title) ;
+        tootlbarTitle.setText(title);
+        myToolbar.setTitle(title);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(getDrawable(R.drawable.favicon32x32));
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     public void calculate(View view) {
