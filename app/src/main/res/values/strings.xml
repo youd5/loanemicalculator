@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Loan EMI Calculator</string>
+    <string name="tv_emi_text">Monthly EMI</string>
+    <string name="tv_emi_result_text">20</string>
+    <string name="monthly_emi_calculator">Monthly EMI Calculator</string>
 </resources>

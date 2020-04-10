@@ -16,7 +16,8 @@ public class EMIResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_e_m_i_result);
-
+        String emi;
+        Integer principal = 0, interestRate = 0, time = 0;
         setToolbar("EMI Details");
 
 
@@ -26,14 +27,27 @@ public class EMIResultActivity extends AppCompatActivity {
 
         //TODO: Push this data to local storage, to use in a new tab in this activity.
 
-        Integer principal = (Integer.parseInt(loanAmount));
-        Integer interestRate = Integer.parseInt(rate);
-        Integer time = Integer.parseInt(duration);
+        try{
+            principal = (Integer.parseInt(loanAmount));
+            interestRate = Integer.parseInt(rate);
+            time = Integer.parseInt(duration);
+            emi = emiCalculate( Double.valueOf(principal), Double.valueOf(interestRate), Double.valueOf(time));
+        } catch (Exception e){
+            emi = "Invalid Inputs";
+        }
 
-        String emi = emiCalculate( Double.valueOf(principal), Double.valueOf(interestRate), Double.valueOf(time));
 
-        TextView tvresult = findViewById(R.id.emi_result);
-        tvresult.setText(emi);
+
+
+        TextView tvPrincipal = findViewById(R.id.tv_loan_amount_value);
+        TextView tvRate = findViewById(R.id.tv_loan_rate_value);
+        TextView tvDuration = findViewById(R.id.tv_loan_duration_value);
+        TextView tvEmi = findViewById(R.id.tv_loan_emi_value);
+        tvPrincipal.setText(principal.toString());
+        tvRate.setText(interestRate.toString());
+        tvDuration.setText(time.toString());
+        tvEmi.setText(emi);
+
     }
 
     public void setToolbar(@NonNull String title) {
