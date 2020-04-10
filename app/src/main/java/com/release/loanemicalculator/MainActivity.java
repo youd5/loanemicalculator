@@ -61,43 +61,11 @@ public class MainActivity extends AppCompatActivity {
         String rate = roi.getText().toString();
         String years = duration.getText().toString();
 
-        // Push this data to local storage
-
-
-        Integer principal = (Integer.parseInt(loanAmount));
-        Integer interestRate = Integer.parseInt(rate);
-        Integer time = Integer.parseInt(years);
-
-        String emi = emiCalculate( Double.valueOf(principal), Double.valueOf(interestRate), Double.valueOf(time));
-        startActivity(new Intent(MainActivity.this, EMIResultActivity.class).putExtra("emi", emi));
-
-        /*
-        // Begin the transaction
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        // Replace the contents of the container with the new fragment
-        ft.replace(R.id.fragment1, EmiResultFragment.newInstance("Your monthly EMI = " + emi));
-        // or ft.add(R.id.your_placeholder, new FooFragment());
-        ft.addToBackStack(null);
-        // Complete the changes added above
-        ft.commit();
-
-         */
-
-
-        //intent.putExtra(EXTRA_MESSAGE, emi);
-        //startActivity(intent);
-    }
-    // Function to calculate EMI
-    static String emiCalculate(Double p, Double rate, Double t) {
-        Double emi;
-        rate = rate / (12 * 100); // one month interest
-        t = t * 12; // one month period
-        emi = (p * rate * (float)Math.pow(1 + rate, t))
-                / (float)(Math.pow(1 + rate, t) - 1);
-
-        DecimalFormat df = new DecimalFormat("#.##");
-        df.setRoundingMode(RoundingMode.HALF_DOWN);
-        return (df.format(emi));
+        startActivity(new Intent(MainActivity.this, EMIResultActivity.class)
+                .putExtra("loanAmount", loanAmount)
+                .putExtra("duration", years)
+                .putExtra("rate", rate)
+        );
     }
 }
 
