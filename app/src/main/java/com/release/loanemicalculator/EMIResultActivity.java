@@ -87,7 +87,7 @@ public class EMIResultActivity extends AppCompatActivity {
 
         cartesian.title("Payment Chart Showing Interest and Principal component in each Month");
 
-        cartesian.yAxis(0).title("Number of Bottles Sold (thousands)");
+        cartesian.yAxis(0).title("Amount Paid:");
         cartesian.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
 
         Set set = Set.instantiate();
