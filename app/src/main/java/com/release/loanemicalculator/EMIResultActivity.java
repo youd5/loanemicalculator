@@ -26,6 +26,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.view.View.GONE;
+
 public class EMIResultActivity extends AppCompatActivity {
 
 
@@ -42,16 +44,14 @@ public class EMIResultActivity extends AppCompatActivity {
         initView();
 
         initChart();
-
-
     }
 
     public void initChart(){
         AnyChartView anyChartView = findViewById(R.id.any_chart_view);
         anyChartView.setProgressBar(findViewById(R.id.progress_bar));
 
-        List<DataEntry> seriesData = new ArrayList<>();
 
+        List<DataEntry> seriesData = new ArrayList<>();
 
         Integer  N = time*12;
         Double r = interestRate;
@@ -60,12 +60,13 @@ public class EMIResultActivity extends AppCompatActivity {
             E = Double.valueOf(emi);
         }catch (Exception e){
             //Not valid inputs. so return.
+            //TODO: remove the progress bar loader
             return;
         }
 
         //TODO: minor, instead of month count, add actual month, year calculated and show in the graph
         for(int n = 1; n < N; n++){
-            Double pp = (double) Math.pow(1/(1+r/1200),(N-n+1)) *E ;
+            Double pp = (double) Math.pow(1/(1+r/1200),(N-n+1)) * E ;
             Double ii = E-pp;
             seriesData.add(new CustomDataEntry("Month " + String.valueOf(n), E, CommonHelper.formatDouble(ii), CommonHelper.formatDouble(pp)));
         }
