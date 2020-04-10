@@ -16,11 +16,14 @@ public class EMIResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_e_m_i_result);
+        setToolbar("EMI Details");
+        initView();
+
+    }
+
+    public void initView(){
         String emi;
         Integer principal = 0, interestRate = 0, time = 0;
-        setToolbar("EMI Details");
-
-
         String loanAmount = getIntent().getStringExtra("loanAmount");
         String rate = getIntent().getStringExtra("rate");
         String duration = getIntent().getStringExtra("duration");
@@ -36,9 +39,6 @@ public class EMIResultActivity extends AppCompatActivity {
             emi = "Invalid Inputs";
         }
 
-
-
-
         TextView tvPrincipal = findViewById(R.id.tv_loan_amount_value);
         TextView tvRate = findViewById(R.id.tv_loan_rate_value);
         TextView tvDuration = findViewById(R.id.tv_loan_duration_value);
@@ -47,7 +47,6 @@ public class EMIResultActivity extends AppCompatActivity {
         tvRate.setText(interestRate.toString());
         tvDuration.setText(time.toString());
         tvEmi.setText(emi);
-
     }
 
     public void setToolbar(@NonNull String title) {
